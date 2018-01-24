@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import syed.com.wordrepo.R;
 import syed.com.wordrepo.entitiy.Word;
-import syed.com.wordrepo.utility.WordRepoApplication;
+import syed.com.wordrepo.WordRepoApplication;
 
 public class NewWordActivity extends AppCompatActivity {
     //Todo implement eventbus

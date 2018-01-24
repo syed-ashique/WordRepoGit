@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import syed.com.wordrepo.R;
-import syed.com.wordrepo.utility.AudioFileUtility;
+import syed.com.wordrepo.utility.AudioFileUtil;
 
 public class NewRecordActivity extends AppCompatActivity {
 
@@ -54,10 +54,10 @@ public class NewRecordActivity extends AppCompatActivity {
     private void onRecord(boolean start) {
         if (start) {
             mRecorder = new MediaRecorder();
-            AudioFileUtility.startRecording(mRecorder, this);
+            AudioFileUtil.startRecording(mRecorder, this);
             startTimer();
         } else {
-            AudioFileUtility.stopRecording(mRecorder);
+            AudioFileUtil.stopRecording(mRecorder);
             mRecorder = null;
             stopTimer();
             setResult(RESULT_OK);

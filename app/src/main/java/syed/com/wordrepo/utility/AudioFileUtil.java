@@ -18,7 +18,7 @@ import static syed.com.wordrepo.activity.WordListActivity.TAG;
  * Created by syed on 1/19/18.
  */
 
-public class AudioFileUtility {
+public class AudioFileUtil {
 
     private static final String MEDIA_FORMAT = ".3gp";
     private static final String FILE_SEPARATOR = "/";

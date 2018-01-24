@@ -20,7 +20,7 @@ import java.io.File;
 
 import syed.com.wordrepo.R;
 import syed.com.wordrepo.adapter.AudioListAdapter;
-import syed.com.wordrepo.utility.AudioFileUtility;
+import syed.com.wordrepo.utility.AudioFileUtil;
 
 public class AudioListActivity extends AppCompatActivity {
 
@@ -78,7 +78,7 @@ public class AudioListActivity extends AppCompatActivity {
             File file = mAdapter.getFileByPosition(position);
 
             mPlayer = new MediaPlayer();
-            AudioFileUtility.startPlaying(mPlayer, file);
+            AudioFileUtil.startPlaying(mPlayer, file);
             mRunningAudioPosition = position;
 
             viewHolder.playImageView.setVisibility(View.GONE);
@@ -87,7 +87,7 @@ public class AudioListActivity extends AppCompatActivity {
 
             setAudioProgress(mPlayer.getDuration(), viewHolder.audioProgress);
         } else {
-            AudioFileUtility.stopPlaying(mPlayer);
+            AudioFileUtil.stopPlaying(mPlayer);
             resetRunningAudioPosition();
             mPlayer = null;
 
@@ -126,9 +126,9 @@ public class AudioListActivity extends AppCompatActivity {
 
     private void onPlay(boolean start, File file) {
         if (start) {
-            AudioFileUtility.startPlaying(mPlayer, file);
+            AudioFileUtil.startPlaying(mPlayer, file);
         } else {
-            AudioFileUtility.stopPlaying(mPlayer);
+            AudioFileUtil.stopPlaying(mPlayer);
         }
     }
 

@@ -37,9 +37,6 @@ public class NotificationUtil {
     private static PendingIntent getPendingIntent(Context context, Class destinationClass) {
         Intent resultIntent = new Intent(context, destinationClass);
 
-
-
-
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(destinationClass);
 
@@ -70,7 +67,9 @@ public class NotificationUtil {
         Log.info(SchedulerUtil.class, "Posting Word Notification ...");
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(setChannel());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager.createNotificationChannel(setChannel());
+        }
         manager.notify(NOTIFICATION_ID, builder.build());
     }
 
