@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="syed.com.wordrepo">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:name=".WordRepoApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.WordListActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.NewWordActivity" />
+        <activity android:name=".activity.NewRecordActivity"></activity>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.AudioListActivity"
+            android:label="@string/title_activity_audio_list_adapter"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <service
+            android:name=".services.WordNotificationJobService"
+            android:label="Daily Word Service"
+            android:permission="android.permission.BIND_JOB_SERVICE" >
+        </service>
+
+        <service
+            android:name=".services.RecordReminderJobService"
+            android:label="Record Reminder Service"
+            android:permission="android.permission.BIND_JOB_SERVICE" >
+        </service>
+
+        <receiver android:name=".Receiver.BootCompletedReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
