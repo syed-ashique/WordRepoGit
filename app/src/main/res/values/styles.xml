@@ -26,4 +26,31 @@
         <item name="android:layout_marginBottom">6dp</item>
         <item name="android:paddingLeft">8dp</item>
     </style>
+
+    <style name="new_word_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">#E1E1E1</item>
+        <item name="android:weightSum">1</item>
+    </style>
+
+    <style name="new_word_item_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">.25</item>
+    </style>
+
+    <style name="new_word_item_edit_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">.75</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/cardview_dark_background</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/rounded_edittext</item>
+    </style>
+
 </resources>

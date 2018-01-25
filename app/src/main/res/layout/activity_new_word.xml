@@ -1,61 +1,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:background="@android:color/darker_gray"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edit_word"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_word"
-        android:inputType="textAutoComplete"
-        android:padding="@dimen/small_padding"
-        android:layout_marginBottom="@dimen/big_padding"
-        android:layout_marginTop="@dimen/big_padding"
-        android:textSize="18sp" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_meaning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/big_padding"
-        android:layout_marginTop="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_word"
-        android:inputType="textAutoComplete"
-        android:padding="@dimen/small_padding"
-        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/edit_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/big_padding"
-        android:layout_marginTop="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_word"
-        android:inputType="textAutoComplete"
-        android:padding="@dimen/small_padding"
-        android:textSize="18sp" />
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            card_view:cardBackgroundColor="#E1E1E1"
+            card_view:cardCornerRadius="4dp">
 
-    <EditText
-        android:id="@+id/edit_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/big_padding"
-        android:layout_marginTop="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_word"
-        android:inputType="textAutoComplete"
-        android:padding="@dimen/small_padding"
-        android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/big_padding"
+                android:paddingStart="@dimen/big_padding">
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_save"
-        android:textColor="@color/buttonLabel" />
+                <LinearLayout style="@style/new_word_item">
+
+                    <TextView
+                        style="@style/new_word_item_text"
+                        android:text="Word" />
+
+                    <EditText
+                        android:id="@+id/edit_word"
+                        style="@style/new_word_item_edit_text" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/new_word_item">
+
+                    <TextView
+                        style="@style/new_word_item_text"
+                        android:text="Meaning" />
+
+                    <EditText
+                        android:id="@+id/edit_meaning"
+                        style="@style/new_word_item_edit_text" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/new_word_item">
+
+                    <TextView
+                        style="@style/new_word_item_text"
+                        android:text="Sentence" />
+
+                    <EditText
+                        android:id="@+id/edit_description"
+                        style="@style/new_word_item_edit_text" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/new_word_item">
+
+                    <TextView
+                        style="@style/new_word_item_text"
+                        android:text="Note" />
+
+                    <EditText
+                        android:id="@+id/edit_note"
+                        style="@style/new_word_item_edit_text" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            card_view:cardBackgroundColor="#E1E1E1"
+            card_view:cardCornerRadius="4dp">
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_dark"
+                android:text="@string/button_save"
+                android:textColor="@color/buttonLabel" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
 </LinearLayout>
