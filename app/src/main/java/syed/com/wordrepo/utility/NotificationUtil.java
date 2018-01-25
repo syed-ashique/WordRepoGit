@@ -23,6 +23,7 @@ public class NotificationUtil {
     private static final String CHANNEL_ID = "channel_01";
     private static final String CHANNEL_NAME = "word_channel";
     private static final String CHANNEL_DESCRIPTION = "word channel demo";
+
     private static final int SMALL_ICON_ID = R.drawable.ic_notifications_black_24dp;
     private static final int NOTIFICATION_ID = 1564;
 
@@ -59,7 +60,6 @@ public class NotificationUtil {
         return channel;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void createWordNotification(Context context, String title, String text) {
         NotificationCompat.Builder builder = getNotificationBuilder(context, title, text);
 
@@ -67,9 +67,11 @@ public class NotificationUtil {
         Log.info(SchedulerUtil.class, "Posting Word Notification ...");
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             manager.createNotificationChannel(setChannel());
         }
+
         manager.notify(NOTIFICATION_ID, builder.build());
     }
 

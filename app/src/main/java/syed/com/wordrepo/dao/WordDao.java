@@ -27,4 +27,11 @@ public interface WordDao {
 
     @Query("SELECT * FROM word_table ORDER BY word ASC")
     LiveData<List<Word>> getAllWords();
+
+    //Todo make it more generic by passing the table name to the method
+    @Query("SELECT COUNT(*) FROM word_table")
+    int getWordTableSize();
+
+    @Query("SELECT * FROM word_table WHERE id = :id")
+    Word getWord(int id);
 }

@@ -44,4 +44,12 @@ public class WordRepository {
             return null;
         }
     }
+
+    public int getWordTableSize() {
+        return mWordDao.getWordTableSize();
+    }
+
+    public Word getWordById(int id) {
+        return mWordDao.getWord(id);//mAllWords.getValue().get(id);
+    }
 }

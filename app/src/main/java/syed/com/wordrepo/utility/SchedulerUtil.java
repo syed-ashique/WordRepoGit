@@ -20,9 +20,9 @@ public class SchedulerUtil {
     public static void scheduleWordNotificationJob(Context context) {
         ComponentName serviceComponent = new ComponentName(context, WordNotificationJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(0, serviceComponent);
-        builder.setMinimumLatency(SECOND); // wait at least
-        builder.setOverrideDeadline(1 * MINUTE); // maximum delay
-//        builder.setPeriodic(1 * MINUTE);
+//        builder.setMinimumLatency(SECOND); // wait at least
+//        builder.setOverrideDeadline(1000); // maximum delay
+        builder.setPeriodic(MINUTE);
 
         Log.info(SchedulerUtil.class, "Sheduling WordNotification ...");
         //builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED); // require unmetered network
