@@ -8,8 +8,8 @@ import android.os.Message;
 
 import java.util.Random;
 
-import syed.com.wordrepo.WordRepoApplication;
 import syed.com.wordrepo.entitiy.Word;
+import syed.com.wordrepo.repo.WordRepository;
 import syed.com.wordrepo.utility.Log;
 import syed.com.wordrepo.utility.NotificationUtil;
 
@@ -18,9 +18,9 @@ import syed.com.wordrepo.utility.NotificationUtil;
  */
 
 public class WordNotificationJobService extends JobService implements Handler.Callback {
-
     private static final int SEND_NOTIFICATION = 1;
     private Handler mHandler;
+    private WordRepository mWordRepository;
 
     @Override
     public boolean handleMessage(Message msg) {
@@ -41,6 +41,7 @@ public class WordNotificationJobService extends JobService implements Handler.Ca
     @Override
     public boolean onStartJob(JobParameters params) {
         Log.info(this.getClass(), "onStartJob() -> starting job..");
+        mWordRepository = new WordRepository(getApplication());
 
         if (mHandler == null) {
             mHandler = new Handler(Looper.getMainLooper(), this);
@@ -65,12 +66,12 @@ public class WordNotificationJobService extends JobService implements Handler.Ca
 
     public Word getRandomWord() {
         Word word = null;
-        int size = WordRepoApplication.getWordRepository().getWordTableSize();
+        int size = mWordRepository.getWordTableSize();
         Log.info(this.getClass(), "Table size: " + size);
 
         if (size > 0) {
             Random rand = new Random();
-            word = WordRepoApplication.getWordRepository().getWordById(rand.nextInt(size));
+            word = mWordRepository.getWordById(rand.nextInt(size));
             Log.info(this.getClass(), "Selected random word is : " + word.getWord());
         }
 

@@ -48,8 +48,8 @@ public class NewWordActivity extends AppCompatActivity {
                     , mEditDescriptionView.getText().toString()
                     , mEditNoteView.getText().toString());
 
-            //Todo need to work with it. Not good to expose repository in the whole application context
-            WordRepoApplication.getWordRepository().insertWord(word);
+            ((WordRepoApplication) getApplicationContext()).setWord(word);
+            setResult(RESULT_OK);
             finish();
 //          EventBus.getDefault().post(word);
         }

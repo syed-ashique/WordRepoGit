@@ -19,12 +19,13 @@ import android.view.View;
 import java.util.List;
 
 import syed.com.wordrepo.R;
+import syed.com.wordrepo.WordRepoApplication;
 import syed.com.wordrepo.adapter.WordListAdapter;
 import syed.com.wordrepo.entitiy.Word;
 import syed.com.wordrepo.viewmodel.WordViewModel;
 
 public class WordListActivity extends AppCompatActivity {
-    public static final String TAG = "WORD_LIST_ACTIVITY";
+    public static final int NEW_WORD_REQUEST_CODE = 0;
 
     private WordViewModel mWordViewModel;
 
@@ -32,7 +33,7 @@ public class WordListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.word_recyclerview);
@@ -61,37 +62,16 @@ public class WordListActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    /*
-    @Subscribe
-    public void onEvent(Word word) {
-        mWordViewModel.insert(word);
-        Log.d(TAG, "Subscriber initiated :" );
-    }
-
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "syed : Registering..." );
-        if(!EventBus.getDefault().isRegistered(Word.class)) {
-            EventBus.getDefault().register(this);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NEW_WORD_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                mWordViewModel.insert(((WordRepoApplication) getApplicationContext()).getWord());
+            }
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        if(EventBus.getDefault().isRegistered(Word.class)) {
-            EventBus.getDefault().unregister(this);
-        }
-        super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(EventBus.getDefault().isRegistered(Word.class)) {
-            EventBus.getDefault().unregister(this);
-        }
-        super.onBackPressed();
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,4 +112,36 @@ public class WordListActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    /*
+    @Subscribe
+    public void onEvent(Word word) {
+        mWordViewModel.insert(word);
+        Log.d(TAG, "Subscriber initiated :" );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "syed : Registering..." );
+        if(!EventBus.getDefault().isRegistered(Word.class)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(EventBus.getDefault().isRegistered(Word.class)) {
+            EventBus.getDefault().unregister(this);
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(EventBus.getDefault().isRegistered(Word.class)) {
+            EventBus.getDefault().unregister(this);
+        }
+        super.onBackPressed();
+    }*/
 }
