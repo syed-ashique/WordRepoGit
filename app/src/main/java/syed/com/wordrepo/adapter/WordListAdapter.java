@@ -38,11 +38,15 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
             String meaning = ""+mWords.get(position).getMeaning();
             String description = ""+mWords.get(position).getDescription();
-            String noteText = ""+mWords.get(position).getNote();
+            String note = ""+mWords.get(position).getNote();
+
+            holder.meaningText.setVisibility(meaning.isEmpty()?View.GONE:View.VISIBLE);
+            holder.descriptionText.setVisibility(description.isEmpty()?View.GONE:View.VISIBLE);
+            holder.noteText.setVisibility(note.isEmpty()?View.GONE:View.VISIBLE);
 
             holder.meaningText.setText(meaning);
             holder.descriptionText.setText(description);
-            holder.noteText.setText(noteText);
+            holder.noteText.setText(note);
         } else {
             holder.wordText.setText("No Word");
             holder.meaningText.setText("None");

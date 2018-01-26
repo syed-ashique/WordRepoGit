@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="buttonLabel">#d3d3d3</color>
+    <color name="darker_gray">#c1c1c1</color>
+    <color name="dark_gray">#cacaca</color>
+    <color name="gray">#d3d3d3</color>
+    <color name="light_gray">#e1e1e1</color>
+    <color name="lighter_gray">#e7e7e7</color>
 </resources>
