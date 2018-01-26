@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,14 +11,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static syed.com.wordrepo.activity.WordListActivity.TAG;
 
 /**
  * Created by syed on 1/19/18.
  */
 
 public class AudioFileUtil {
-
     private static final String MEDIA_FORMAT = ".3gp";
     private static final String FILE_SEPARATOR = "/";
 
@@ -32,7 +29,7 @@ public class AudioFileUtil {
         try {
             recorder.prepare();
         } catch (IOException e) {
-            Log.e(TAG, "prepare() failed");
+            Log.error(AudioFileUtil.class, "prepare() failed");
         }
 
         recorder.start();
@@ -58,7 +55,7 @@ public class AudioFileUtil {
             player.prepare();
             player.start();
         } catch (IOException e) {
-            Log.e(" AudioFileUtility", "prepare() failed");
+            Log.error(AudioFileUtil.class, "prepare() failed");
         }
     }
 
@@ -71,7 +68,7 @@ public class AudioFileUtil {
             player.setDataSource(Uri.fromFile(file).toString());
             return player.getDuration();
         } catch (IOException e) {
-            Log.e(" AudioFileUtility", "prepare() failed");
+            Log.error(AudioFileUtil.class, "prepare() failed");
         }
 
         return -1;

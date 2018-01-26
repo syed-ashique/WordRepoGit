@@ -11,4 +11,7 @@ public class Log {
     public static void info(Class c, String text){
         android.util.Log.d(TAG+c.getName(), text);
     }
+    public static void error(Class c, String text){
+        android.util.Log.e(TAG+c.getName(), text);
+    }
 }
