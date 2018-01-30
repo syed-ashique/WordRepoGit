@@ -6,68 +6,82 @@
     android:layout_margin="5dp"
     card_view:cardCornerRadius="4dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/word_item_header"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/word_item_checkbox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:padding="5dp"
-            android:background="@android:color/holo_blue_dark"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:padding="10dp"
+            android:theme="@android:style/Theme.Holo.Light"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/word_item_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/holo_blue_dark"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/word_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="15dp"
+                    android:text="Word"
+                    android:textColor="@color/light_gray"
+                    android:textSize="18dp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/word_text_view"
+                android:id="@+id/meaning_text_view"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Word"
-                android:paddingLeft="15dp"
-                android:textColor="@color/light_gray"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/word_item_header"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Meaning"
+                android:textColor="@color/darker_gray"
                 android:textSize="18dp" />
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/meaning_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/word_item_header"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:text="Meaning"
-            android:textColor="@color/darker_gray"
-            android:textSize="18dp" />
+            <TextView
+                android:id="@+id/description_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/meaning_text_view"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="Surname"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14dp" />
 
-        <TextView
-            android:id="@+id/description_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/meaning_text_view"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
-            android:text="Surname"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/note_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/description_text_view"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="Email"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="12dp" />
-
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/note_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description_text_view"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Email"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

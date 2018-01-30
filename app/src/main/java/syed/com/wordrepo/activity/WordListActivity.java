@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,12 +23,16 @@ import syed.com.wordrepo.R;
 import syed.com.wordrepo.WordRepoApplication;
 import syed.com.wordrepo.adapter.WordListAdapter;
 import syed.com.wordrepo.entitiy.Word;
+import syed.com.wordrepo.utility.Log;
 import syed.com.wordrepo.viewmodel.WordViewModel;
 
 public class WordListActivity extends AppCompatActivity {
     public static final int NEW_WORD_REQUEST_CODE = 0;
 
     private WordViewModel mWordViewModel;
+    private WordListAdapter mAdapter;
+    private MenuItem mActionEdit;
+    private MenuItem mActionDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,8 @@ public class WordListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.word_recyclerview);
-        final WordListAdapter adapter = new WordListAdapter(this);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new WordListAdapter(this, new ItemClickListener(), new ItemItemLongClickListener());
+        recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -46,7 +51,7 @@ public class WordListActivity extends AppCompatActivity {
         mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
             @Override
             public void onChanged(@Nullable List<Word> words) {
-                adapter.setWords(words);
+                mAdapter.setWords(words);
             }
         });
 
@@ -68,6 +73,7 @@ public class WordListActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                Log.info(getClass(), "grabing data complete");
                 mWordViewModel.insert(((WordRepoApplication) getApplicationContext()).getWord());
             }
         }
@@ -75,8 +81,11 @@ public class WordListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_word_list, menu);
+
+        mActionEdit = menu.findItem(R.id.action_edit);
+        mActionDelete = menu.findItem(R.id.action_delete);
+
         return true;
     }
 
@@ -88,6 +97,30 @@ public class WordListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        switch (id) {
+            case R.id.action_settings:
+                Toast.makeText(getApplicationContext(), "Working progress...", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.action_edit:
+                //Todo Need to work with it
+                if (mAdapter.getSelectedWords().size()>0) {
+                    Word word = mAdapter.getSelectedWords().get(0);
+                    Toast.makeText(getApplicationContext(), "Working progress... ", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.action_delete:
+                List<Word> words = mAdapter.getSelectedWords();
+                if (words.size() == 0 ) {
+                    Toast.makeText(getApplicationContext(), "No word selected", Toast.LENGTH_LONG).show();
+                } else {
+                    for (Word word: words) {
+                        mWordViewModel.delete(word);
+                    }
+                }
+                break;
+
+            default: Log.info(getClass(), "action id is not recognized");
+        }
         if (id == R.id.action_settings) {
             return true;
         }
@@ -112,6 +145,24 @@ public class WordListActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    private class ItemClickListener implements WordListAdapter.WordOnItemClickListener {
+
+        @Override
+        public void onItemClickListener(View itemview, int position) {
+            mActionEdit.setVisible(mAdapter.selectedWordsSize() == 1?true:false);
+            mActionDelete.setVisible(mAdapter.selectedWordsSize() > 0?true:false);
+            Log.info(getClass(), "wordlist item clicked");
+        }
+    }
+
+    private class ItemItemLongClickListener implements WordListAdapter.WordOnItemLongClickListener {
+
+        @Override
+        public void onItemLongClickListener(View itemview, int position, boolean selectionMode) {
+            Log.info(getClass(), "wordlist item long pressed");
+        }
+    }
 
     /*
     @Subscribe
