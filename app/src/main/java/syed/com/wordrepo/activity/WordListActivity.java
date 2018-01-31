@@ -59,7 +59,7 @@ public class WordListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WordListActivity.this, NewWordActivity.class));
+                startActivityForResult(new Intent(WordListActivity.this, NewWordActivity.class), NEW_WORD_REQUEST_CODE);
             }
         });
 
@@ -77,6 +77,21 @@ public class WordListActivity extends AppCompatActivity {
                 mWordViewModel.insert(((WordRepoApplication) getApplicationContext()).getWord());
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mAdapter.isSelctedMode()) {
+            mAdapter.clearSelections();
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mAdapter.clearSelections();
+        super.onDestroy();
     }
 
     @Override
@@ -113,6 +128,7 @@ public class WordListActivity extends AppCompatActivity {
                 if (words.size() == 0 ) {
                     Toast.makeText(getApplicationContext(), "No word selected", Toast.LENGTH_LONG).show();
                 } else {
+                    mAdapter.clearSelections();
                     for (Word word: words) {
                         mWordViewModel.delete(word);
                     }

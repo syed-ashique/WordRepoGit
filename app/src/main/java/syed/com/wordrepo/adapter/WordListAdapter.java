@@ -53,7 +53,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             String description = ""+mWords.get(position).getDescription();
             String note = ""+mWords.get(position).getNote();
 
-            holder.checkbox.setVisibility(mSelectionMode ? View.VISIBLE : View.GONE);
+            holder.checkbox.setVisibility(isSelctedMode() ? View.VISIBLE : View.GONE);
             ((CheckBox) holder.checkbox).setChecked((mSelectedPositions.contains(position))?true:false);
 
             holder.meaningText.setVisibility(meaning.isEmpty()?View.GONE:View.VISIBLE);
@@ -102,9 +102,11 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    int position = getAdapterPosition();
-                    performActionOnLongPressed(v, position);
-                    performActionOnItemClicked(v, position);
+                    if (!mSelectionMode) {
+                        int position = getAdapterPosition();
+                        performActionOnLongPressed(v, position);
+                        performActionOnItemClicked(v, position);
+                    }
                     return false;
                 }
             });
@@ -122,8 +124,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     private void performActionOnLongPressed(View v, int position) {
         Log.info(getClass(), "performing onLongItem click operation on: " + position);
-        mSelectedPositions = new HashSet<>();
-        mSelectionMode = !mSelectionMode;
+        mSelectionMode = true;
         mOnItemLongClickListerer.onItemLongClickListener(v, position, mSelectionMode);
         notifyDataSetChanged();
     }
@@ -150,6 +151,13 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
+    public void clearSelections() {
+        mSelectedPositions = new HashSet<>();
+        mSelectionMode = false;
+
+        notifyDataSetChanged();
+    }
+
     public List<Word> getSelectedWords() {
         List<Word> list = new ArrayList<>();
         for (int key: mSelectedPositions) {
@@ -160,6 +168,10 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     public int selectedWordsSize() {
         return mSelectedPositions.size();
+    }
+
+    public boolean isSelctedMode() {
+        return mSelectionMode;
     }
 
     public interface WordOnItemLongClickListener {
