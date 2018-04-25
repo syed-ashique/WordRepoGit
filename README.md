@@ -8,3 +8,4 @@ Feature used
  - AndroidViewModel(Android Architecture)), 
  - {RecyclerView, ConstraintLayout(View)}), 
  - {ROOM, EventBus (library)}
+ - Kotlin
