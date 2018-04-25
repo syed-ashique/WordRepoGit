@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +28,13 @@ public class NewRecordActivity extends AppCompatActivity {
     @BindView(R.id.timer_text)
     public TextView mCurrentTimeTV;
 
+    @BindView(R.id.timer_rg)
+    public RadioGroup timerRG;
+
     private MediaRecorder mRecorder = null;
     private int mCurrentTime;
     private boolean mStartRecording = false;
+    private int mTimerSelected;
 
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
@@ -38,7 +43,7 @@ public class NewRecordActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_RECORD_AUDIO_PERMISSION:
                 permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 break;
